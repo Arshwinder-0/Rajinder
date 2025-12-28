@@ -35,7 +35,6 @@
             overflow-x: hidden;
         }
 
-        /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -73,19 +72,20 @@
             text-align: center;
         }
 
-        .loader-spinner {
-            width: 60px;
-            height: 60px;
-            border: 4px solid var(--grey);
-            border-top: 4px solid var(--primary);
+        .loader-logo {
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
+            object-fit: cover;
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8))
+                    drop-shadow(0 0 40px rgba(255, 215, 0, 0.6));
+            animation: loaderFloat 2s ease-in-out infinite, logoGlow 2s ease-in-out infinite alternate;
+            margin-bottom: 20px;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        @keyframes loaderFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
 
         .loader-text {
@@ -98,6 +98,76 @@
         @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
+        }
+
+        /* TDS Notification Badge */
+        .tds-badge {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(26, 26, 26, 0.95);
+            border: 1px solid var(--primary);
+            border-radius: 10px;
+            padding: 10px 15px;
+            z-index: 9998;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.2);
+            animation: badgeSlideIn 0.5s ease 2s forwards, badgePulse 3s ease-in-out infinite 2.5s;
+            opacity: 0;
+            transform: translateX(-100px);
+            transition: all 0.3s ease;
+        }
+
+        .tds-badge:hover {
+            transform: translateX(0) scale(1.05);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.4);
+            background: rgba(40, 40, 40, 0.98);
+        }
+
+        @keyframes badgeSlideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes badgePulse {
+            0%, 100% { box-shadow: 0 5px 20px rgba(255, 215, 0, 0.2); }
+            50% { box-shadow: 0 5px 25px rgba(255, 215, 0, 0.4); }
+        }
+
+        .tds-badge-icon {
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .tds-badge-text {
+            font-size: 0.7rem;
+            color: #888;
+            line-height: 1.3;
+        }
+
+        .tds-badge-text span {
+            display: block;
+            font-size: 0.65rem;
+            color: #666;
+        }
+
+        .tds-badge-text strong {
+            color: var(--primary);
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
 
         /* Navigation */
@@ -286,6 +356,30 @@
             max-width: 900px;
         }
 
+        /* Floating Center Logo */
+        .hero-logo-container {
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease forwards;
+            opacity: 0;
+        }
+
+        .hero-logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            filter: drop-shadow(0 0 15px rgba(255, 215, 0, 1))
+                    drop-shadow(0 0 30px rgba(255, 215, 0, 0.8))
+                    drop-shadow(0 0 45px rgba(255, 215, 0, 0.6));
+            animation: heroLogoFloat 4s ease-in-out infinite, logoGlow 2s ease-in-out infinite alternate;
+            border: 3px solid var(--primary);
+        }
+
+        @keyframes heroLogoFloat {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-15px) scale(1.05); }
+        }
+
         .hero-badge {
             display: inline-block;
             padding: 10px 25px;
@@ -296,7 +390,7 @@
             font-size: 0.9rem;
             font-weight: 500;
             margin-bottom: 30px;
-            animation: fadeInDown 1s ease forwards;
+            animation: fadeInUp 1s ease 0.2s forwards;
             opacity: 0;
         }
 
@@ -305,7 +399,7 @@
             font-weight: 800;
             line-height: 1.2;
             margin-bottom: 20px;
-            animation: fadeInUp 1s ease 0.2s forwards;
+            animation: fadeInUp 1s ease 0.4s forwards;
             opacity: 0;
         }
 
@@ -320,7 +414,7 @@
             font-size: 1.3rem;
             color: var(--text-light);
             margin-bottom: 20px;
-            animation: fadeInUp 1s ease 0.4s forwards;
+            animation: fadeInUp 1s ease 0.6s forwards;
             opacity: 0;
         }
 
@@ -330,7 +424,7 @@
             font-weight: 600;
             margin-bottom: 40px;
             min-height: 40px;
-            animation: fadeInUp 1s ease 0.6s forwards;
+            animation: fadeInUp 1s ease 0.8s forwards;
             opacity: 0;
         }
 
@@ -339,7 +433,7 @@
             gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
-            animation: fadeInUp 1s ease 0.8s forwards;
+            animation: fadeInUp 1s ease 1s forwards;
             opacity: 0;
         }
 
@@ -922,7 +1016,7 @@
             color: var(--primary);
         }
 
-        .contact-info p {
+        .contact-info > p {
             color: #888;
             line-height: 1.8;
             margin-bottom: 40px;
@@ -1144,37 +1238,6 @@
             color: var(--primary);
         }
 
-        .tds-link {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 700;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8),
-                         0 0 20px rgba(255, 215, 0, 0.6),
-                         0 0 30px rgba(255, 215, 0, 0.4);
-            animation: tdsGlow 2s ease-in-out infinite alternate;
-            transition: all 0.3s ease;
-        }
-
-        .tds-link:hover {
-            text-shadow: 0 0 15px rgba(255, 215, 0, 1),
-                         0 0 30px rgba(255, 215, 0, 0.8),
-                         0 0 45px rgba(255, 215, 0, 0.6),
-                         0 0 60px rgba(255, 215, 0, 0.4);
-        }
-
-        @keyframes tdsGlow {
-            0% {
-                text-shadow: 0 0 10px rgba(255, 215, 0, 0.8),
-                             0 0 20px rgba(255, 215, 0, 0.6),
-                             0 0 30px rgba(255, 215, 0, 0.4);
-            }
-            100% {
-                text-shadow: 0 0 15px rgba(255, 215, 0, 1),
-                             0 0 30px rgba(255, 215, 0, 0.8),
-                             0 0 45px rgba(255, 215, 0, 0.6);
-            }
-        }
-
         /* Lightbox */
         .lightbox {
             position: fixed;
@@ -1304,6 +1367,11 @@
             .hero h1 {
                 font-size: 3rem;
             }
+
+            .hero-logo {
+                width: 100px;
+                height: 100px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -1344,6 +1412,11 @@
                 font-size: 2.5rem;
             }
 
+            .hero-logo {
+                width: 80px;
+                height: 80px;
+            }
+
             .section-header h2 {
                 font-size: 2rem;
             }
@@ -1360,17 +1433,32 @@
                 flex-direction: column;
                 gap: 20px;
             }
+
+            .tds-badge {
+                bottom: 15px;
+                left: 15px;
+                padding: 8px 12px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Loader -->
+    <!-- Loader with Floating Logo -->
     <div class="loader">
         <div class="loader-content">
-            <div class="loader-spinner"></div>
+            <img src="logo.jpg" alt="Logo" class="loader-logo">
             <div class="loader-text">Loading...</div>
         </div>
     </div>
+
+    <!-- TDS Badge Notification -->
+    <a href="https://tdsofficial.store" target="_blank" class="tds-badge">
+        <div class="tds-badge-icon"></div>
+        <div class="tds-badge-text">
+            PORTFOLIO
+            <span>Made by <strong>TDS</strong></span>
+        </div>
+    </a>
 
     <!-- Navigation -->
     <nav>
@@ -1403,6 +1491,10 @@
             </div>
         </div>
         <div class="hero-content">
+            <!-- Floating Center Logo -->
+            <div class="hero-logo-container">
+                <img src="logo.jpg" alt="Rajinder Singh" class="hero-logo">
+            </div>
             <div class="hero-badge">
                 <i class="fas fa-star"></i> Available for Work
             </div>
@@ -1570,11 +1662,11 @@
         </div>
         <div class="portfolio-tabs fade-in">
             <button class="tab-btn active" data-filter="all">All Work</button>
-            <button class="tab-btn" data-filter="video">Videos</button>
-            <button class="tab-btn" data-filter="image">Images</button>
+            <button class="tab-btn" data-filter="video">Reels</button>
+            <button class="tab-btn" data-filter="image">Posts</button>
         </div>
         <div class="portfolio-grid">
-            <!-- Videos -->
+            <!-- 4 Videos/Reels -->
             <div class="portfolio-item fade-in" data-type="video">
                 <video src="showcase.mp4" muted loop></video>
                 <div class="play-btn"><i class="fas fa-play"></i></div>
@@ -1615,41 +1707,39 @@
                     </div>
                 </div>
             </div>
-            <div class="portfolio-item fade-in" data-type="video">
-                <video src="showcase4.mp4" muted loop></video>
-                <div class="play-btn"><i class="fas fa-play"></i></div>
-                <div class="portfolio-overlay">
-                    <div class="portfolio-info">
-                        <h3>Reel Edit #5</h3>
-                        <p>Video Editing</p>
-                    </div>
-                </div>
-            </div>
-            <div class="portfolio-item fade-in" data-type="video">
-                <video src="showcase5.mp4" muted loop></video>
-                <div class="play-btn"><i class="fas fa-play"></i></div>
-                <div class="portfolio-overlay">
-                    <div class="portfolio-info">
-                        <h3>Reel Edit #6</h3>
-                        <p>Video Editing</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Images -->
+            <!-- 4 Images/Posts -->
             <div class="portfolio-item fade-in" data-type="image">
-                <img src="showcase.jpg" alt="Poster Design">
+                <img src="showcase.jpg" alt="Post Design 1">
                 <div class="portfolio-overlay">
                     <div class="portfolio-info">
-                        <h3>Poster Design #1</h3>
+                        <h3>Post Design #1</h3>
                         <p>Graphic Design</p>
                     </div>
                 </div>
             </div>
             <div class="portfolio-item fade-in" data-type="image">
-                <img src="showcase1.jpg" alt="Poster Design">
+                <img src="showcase1.jpg" alt="Post Design 2">
                 <div class="portfolio-overlay">
                     <div class="portfolio-info">
-                        <h3>Poster Design #2</h3>
+                        <h3>Post Design #2</h3>
+                        <p>Graphic Design</p>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-item fade-in" data-type="image">
+                <img src="showcase2.jpg" alt="Post Design 3">
+                <div class="portfolio-overlay">
+                    <div class="portfolio-info">
+                        <h3>Post Design #3</h3>
+                        <p>Graphic Design</p>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-item fade-in" data-type="image">
+                <img src="showcase3.jpg" alt="Post Design 4">
+                <div class="portfolio-overlay">
+                    <div class="portfolio-info">
+                        <h3>Post Design #4</h3>
                         <p>Graphic Design</p>
                     </div>
                 </div>
@@ -1800,16 +1890,13 @@
         </div>
         <div class="footer-bottom">
             <p>&copy; 2024 <span>Rajinder Singh</span>. All Rights Reserved.</p>
-            <p style="margin-top: 10px;">Made by <a href="https://tdsofficial.store" target="_blank" class="tds-link">TDS</a></p>
         </div>
     </footer>
 
     <!-- Lightbox -->
     <div class="lightbox" id="lightbox">
         <div class="lightbox-close"><i class="fas fa-times"></i></div>
-        <div class="lightbox-content">
-            <!-- Content will be inserted here -->
-        </div>
+        <div class="lightbox-content"></div>
     </div>
 
     <!-- Scroll to Top -->
@@ -1822,7 +1909,7 @@
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.querySelector('.loader').classList.add('hidden');
-            }, 1500);
+            }, 2000);
         });
 
         // Navigation Scroll
@@ -2030,21 +2117,17 @@
             const submitBtn = document.getElementById('submit-btn');
             const formStatus = document.getElementById('form-status');
             
-            // Get form data
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const subject = document.getElementById('subject').value;
             const message = document.getElementById('message').value;
             
-            // Disable button and show loading
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
             
-            // Telegram Bot Configuration
             const botToken = '8338927931:AAGVTUqEyAGPRY9iTmWK_Mm6w3JK6L67KpQ';
             const chatId = '8338927931';
             
-            // Format message for Telegram
             const telegramMessage = `
 🔔 *New Portfolio Contact*
 
@@ -2086,17 +2169,15 @@ ${message}
                 formStatus.textContent = '❌ Failed to send message. Please try contacting directly via phone or email.';
             }
             
-            // Reset button
             submitBtn.disabled = false;
             submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
             
-            // Hide status after 5 seconds
             setTimeout(() => {
                 formStatus.className = 'form-status';
             }, 5000);
         });
 
-        // Smooth Scroll for Navigation Links
+        // Smooth Scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
